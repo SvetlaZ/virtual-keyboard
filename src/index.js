@@ -25,6 +25,22 @@ function backspace() {
   document.querySelector('input').value = document.querySelector('input').value.slice(0, -1);
 }
 
+function capslock() {
+  const collection = document.getElementsByClassName('key');
+
+  for (const item of collection) {
+    if (item.textContent.length === 1) {
+      if (this.classList.contains('key_down')) {
+        item.textContent = item.textContent.toLowerCase();
+      } else {
+        item.textContent = item.textContent.toUpperCase();
+      }
+    }
+  }
+
+  this.classList.toggle('key_down');
+}
+
 function focusButton() {
   this.classList.add('key_down');
 }
@@ -58,8 +74,10 @@ function CreateKeys() {
       WrapKeys.append(LineBreak);
     }
 
-    key.addEventListener('mousedown', focusButton);
-    key.addEventListener('mouseup', blurButton);
+    if (keys[i] !== 'capslock') {
+      key.addEventListener('mousedown', focusButton);
+      key.addEventListener('mouseup', blurButton);
+    }
 
     switch (keys[i]) {
       case 'space':
@@ -73,6 +91,7 @@ function CreateKeys() {
         key.addEventListener('click', backspace);
         break;
       case 'capslock':
+        key.addEventListener('click', capslock);
         break;
       case 'l_shift':
       case 'r_shift':
