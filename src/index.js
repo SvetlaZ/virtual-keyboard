@@ -32,17 +32,17 @@ const keys = {
   'ru': ['ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace',
     'Tab', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', '\\',
     'CapsLock', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'enter',
-    'l_shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'r_shift',
-    'l_ctrl', 'win', 'l_alt', 'Space', 'r_alt', 'r_ctrl'],
+    'l_shift', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '.', 'ar_up', 'r_shift',
+    'l_ctrl', 'win', 'l_alt', 'Space', 'r_alt', 'r_ctrl', 'ar_left', 'ar_down', 'ar_right', 'del'],
 
   'ru_shift': ['Ё', '!', '"', '№', ';', '%', ':', '?', '*', '(', ')', '_', '+', 'backspace',
     'Tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '/',
     'CapsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'enter',
-    'l_shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', 'r_shift',
-    'l_ctrl', 'win', 'l_alt', 'Space', 'r_alt', 'r_ctrl'],
+    'l_shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', , 'ar_up', 'r_shift',
+    'l_ctrl', 'win', 'l_alt', 'Space', 'r_alt', 'r_ctrl', 'ar_down', 'ar_right', 'del'],
 };
 
-const leng = 'eng';
+let leng = 'eng';
 
 function backspace() {
   textarea.setRangeText('', textarea.selectionStart - 1, textarea.selectionEnd, 'end');
@@ -214,3 +214,45 @@ document.querySelector('.screen').addEventListener('keyup', (event) => {
     }
   }
 });
+
+function ChangeLeng(func, ...codes) {
+  const pressed = new Set();
+
+  document.addEventListener('keydown', function (event) {
+    pressed.add(event.code);
+    for (let code of codes) {
+      if (!pressed.has(code)) {
+        return;
+      }
+    }
+
+    pressed.clear();
+
+    func();
+  });
+
+  document.addEventListener('keyup', function(event) {
+    pressed.delete(event.code);
+  });
+
+}
+
+ChangeLeng(
+  () => {
+    if (leng === 'eng') {
+      const collection = document.getElementsByClassName('key');
+      for (let i = 0; i < collection.length; i += 1) {
+        collection[i].textContent = keys.ru[i];
+        leng = 'ru';
+      }
+    } else {
+      const collection = document.getElementsByClassName('key');
+      for (let i = 0; i < collection.length; i += 1) {
+        collection[i].textContent = keys.eng[i];
+        leng = 'eng';
+      }
+    }
+  },
+  'AltLeft',
+  'ShiftLeft',
+);
