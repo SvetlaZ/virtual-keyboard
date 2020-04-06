@@ -4,10 +4,11 @@ const wrapper = document.createElement('div');
 wrapper.classList.add('wrapper');
 document.querySelector('body').prepend(wrapper);
 
-const input = document.createElement('input');
-input.classList.add('screen');
-document.querySelector('.wrapper').append(input);
-document.querySelector('input').focus();
+const text = document.createElement('textarea');
+text.classList.add('screen');
+document.querySelector('.wrapper').append(text);
+const textarea = document.querySelector('textarea');
+textarea.focus();
 
 const wrapperForKeyboard = document.createElement('div');
 wrapperForKeyboard.classList.add('wrapper-for-keyboard');
@@ -44,7 +45,8 @@ const keys = {
 let leng = 'eng';
 
 function backspace() {
-  document.querySelector('input').value = document.querySelector('input').value.slice(0, -1);
+  textarea.setRangeText('', textarea.selectionStart - 1, textarea.selectionEnd, 'end');
+  textarea.focus();
 }
 
 function capslock() {
@@ -79,6 +81,21 @@ function shiftUp() {
       collection[i].textContent = keys.eng[i];
     }
   }
+}
+
+function enter() {
+  textarea.setRangeText('\n', textarea.selectionStart, textarea.selectionEnd, 'end');
+  textarea.focus();
+}
+
+function space() {
+  textarea.setRangeText(' ', textarea.selectionStart, textarea.selectionEnd, 'end');
+  textarea.focus();
+}
+
+function tab() {
+  textarea.setRangeText('\t', textarea.selectionStart, textarea.selectionEnd, 'end');
+  textarea.focus();
 }
 
 function focusButton() {
@@ -121,11 +138,13 @@ function CreateKeys() {
 
     switch (keys[leng][i]) {
       case 'space':
-        key.innerHTML = ' ';
-        document.querySelector('input').focus();
+        key.addEventListener('click', space);
         break;
       case 'tab':
-        key.innerHTML = '    ';
+        key.addEventListener('click', tab);
+        break;
+      case 'enter':
+        key.addEventListener('click', enter);
         break;
       case 'backspace':
         key.addEventListener('click', backspace);
