@@ -1,21 +1,22 @@
 .wrapper {
     margin: 0 auto;
-    width: 90%;
+    width: 65%;
     display: flex;
     flex-direction: column;
 }
 
 .screen {
-    width: 100%;
-    height: 50px;
+    width: 99%;
+    height: 200px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     outline: none;
+    resize: none;
 }
 
 .wrapper-for-keyboard {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     margin-top: 10px;
@@ -23,15 +24,15 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     width: 100%;
     border-radius: 10px;
-    height: 200px;
+    height: 250px;
 }
 
 .key {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 6%;
-  height: 15%;
+  width: 5%;
+  height: 13%;
   background-color: #63baff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   color: #020a11;
@@ -41,7 +42,8 @@
 }
 
 .key_service {
-  width: 10%;
+  width: 8%;
+  background-color: #3e78a7;
 }
 
 .key_space {
@@ -55,7 +57,7 @@
 
 .key:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
-  border-radius: 5px;
+  border-radius: 15px;
 }
 
 .break {
