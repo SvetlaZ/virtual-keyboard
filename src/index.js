@@ -70,6 +70,7 @@ const keys = {
     { key: 188, char: ',' },
     { key: 190, char: '.' },
     { key: 191, char: '/' },
+    { key: 38, char: '&#8593' },
     { key: 16, char: 'r_shift' },
     { key: 17, char: 'l_ctrl' },
     { key: 18, char: 'l_alt' },
@@ -77,9 +78,8 @@ const keys = {
     { key: 18, char: 'r_alt' },
     { key: 17, char: 'r_ctrl' },
     { key: 37, char: '&#8592' },
-    { key: 38, char: '&#8593' },
-    { key: 39, char: '&#8594' },
     { key: 40, char: '&#8595' },
+    { key: 39, char: '&#8594' },
     { key: 46, char: 'del' },
   ],
 
@@ -136,6 +136,7 @@ const keys = {
     { key: 188, char: '<' },
     { key: 190, char: '>' },
     { key: 191, char: '?' },
+    { key: 38, char: '&#8593' },
     { key: 16, char: 'r_shift' },
     { key: 17, char: 'l_ctrl' },
     { key: 18, char: 'l_alt' },
@@ -143,9 +144,8 @@ const keys = {
     { key: 18, char: 'r_alt' },
     { key: 17, char: 'r_ctrl' },
     { key: 37, char: '&#8592' },
-    { key: 38, char: '&#8593' },
-    { key: 39, char: '&#8594' },
     { key: 40, char: '&#8595' },
+    { key: 39, char: '&#8594' },
     { key: 46, char: 'del' },
   ],
 
@@ -202,6 +202,7 @@ const keys = {
     { key: 188, char: 'б' },
     { key: 190, char: 'ю' },
     { key: 191, char: '.' },
+    { key: 38, char: '&#8593' },
     { key: 16, char: 'r_shift' },
     { key: 17, char: 'l_ctrl' },
     { key: 18, char: 'l_alt' },
@@ -209,9 +210,8 @@ const keys = {
     { key: 18, char: 'r_alt' },
     { key: 17, char: 'r_ctrl' },
     { key: 37, char: '&#8592' },
-    { key: 38, char: '&#8593' },
-    { key: 39, char: '&#8594' },
     { key: 40, char: '&#8595' },
+    { key: 39, char: '&#8594' },
     { key: 46, char: 'del' },
   ],
 
@@ -268,6 +268,7 @@ const keys = {
     { key: 188, char: 'Б' },
     { key: 190, char: 'Ю' },
     { key: 191, char: ',' },
+    { key: 38, char: '&#8593' },
     { key: 16, char: 'r_shift' },
     { key: 17, char: 'l_ctrl' },
     { key: 18, char: 'l_alt' },
@@ -275,9 +276,8 @@ const keys = {
     { key: 18, char: 'r_alt' },
     { key: 17, char: 'r_ctrl' },
     { key: 37, char: '&#8592' },
-    { key: 38, char: '&#8593' },
-    { key: 39, char: '&#8594' },
     { key: 40, char: '&#8595' },
+    { key: 39, char: '&#8594' },
     { key: 46, char: 'del' },
   ],
 };
@@ -463,7 +463,8 @@ function CreateKeys() {
 
     WrapKeys.append(key);
 
-    if (keys[leng][i].char === '\\' || keys[leng][i].char === '&#9166' || keys[leng][i].char === 'r_shift' || keys[leng][i].char === '&#8656') {
+    if (keys[leng][i].char === '\\' || keys[leng][i].char === '&#9166' || keys[leng][i].char === 'r_shift'
+    || keys[leng][i].char === '&#8656' || keys[leng][i].char === 'del') {
       const LineBreak = document.createElement('div');
       LineBreak.classList.add('break');
       WrapKeys.append(LineBreak);
@@ -675,3 +676,7 @@ ChangeLeng(
   'AltLeft',
   'ShiftLeft',
 );
+
+const lengtext = document.createElement('p');
+lengtext.textContent = 'Изменить язык - "l_alt" + "l_shift"';
+document.querySelector('.wrapper').append(lengtext);
